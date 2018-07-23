@@ -1,0 +1,101 @@
+<div flex>
+        <md-tabs layout-fill style="background: white" 
+        md-swipe-content="true"
+        md-selected="selectedTab"
+        >
+            <md-tab ng-repeat="drink in drinkList" flex layout="column" ng-disabled="!activeUser.admin && drink.locked">
+                <md-tab-label style="background: yellow">
+                    //drink.id//
+                    <md-icon ng-if="drink.current" md-svg-icon="current"></md-icon>
+                    <md-icon ng-if="drink.finished && drink.rating==-1 " md-svg-icon="alert"></md-icon>
+                    <md-icon ng-if="drink.finished && drink.rating!=-1 " md-svg-icon="done"></md-icon>
+                </md-tab-label>
+                <md-tab-body layout="column" style="background-color:gray">
+                    <md-content flex layout="column" layout-fill style="background-color:gray">
+                        <div  style="background-color:rosybrown; height:50px">
+                                <h3 ng-hide="!drink.reveal">//drink.wh_name//</h3>
+                                <md-button ng-hide="drink.reveal" ng-click="adminRevealDrink(drink.id)">Reveal</md-button>
+                        </div>
+                        <div style="background: lightcoral;overflow-y:scroll" layout="column" flex>
+                                <div layout-padding>
+
+                                        <md-grid-list
+                                        md-cols="5" md-rows="1"
+                                        md-row-height="2:1"
+                                         >
+                                         Rating: good
+                                         <md-grid-tile class="gray" ng-repeat="n in [1,2,3,4,5]">
+                                                <!-- noteType.rating = (noteType.rating == n ? n-.5 : n) -->
+                                                <md-icon ng-click="cycleRating(drink,n)" ng-if="drink.rating>=n " md-svg-icon="starfull"></md-icon>
+                                                <md-icon ng-click="cycleRating(drink,n)" ng-if="drink.rating==(n-.5) " md-svg-icon="starhalf"></md-icon>
+                                                <md-icon ng-click="cycleRating(drink,n)" ng-if="drink.rating<(n-.5) " md-svg-icon="starempty"></md-icon>
+                                            </md-grid-tile>
+                                        </md-grid-list>
+
+                                </div>
+
+                                
+                                <div ng-repeat="noteType in drink.wh_notes_types" layout-margin  >
+                                        <div>
+                                            <span class="drinkSubHead">//noteType.note_type//:</span>
+                                            <span class="md-block">//noteType.note_label//</span>
+                                        </div>
+                                        <md-content style="background-color: transparent" >
+                                            <div ng-repeat="note in noteType.note_ratings" 
+                                            class="noteRatingBox"
+                                            ng-class="{'noteRatingBoxNeutral':note.rating==0,'noteRatingBoxAgree':note.rating==1,'noteRatingBoxDisagree':note.rating==-1}"
+                                            ng-click="toggleNoteRating(note);updateRating(note)" layout="row">
+                                                <span class="noteText">             //note.note//       </span>
+                                                <div class="noteRatingUserAlso">    //note.also.length//</div>
+                                                <div class="noteRatingUserNeutral"> //note.neutral//    </div>
+                                            </div>
+                                        </md-content>
+
+                                        <!-- <md-grid-list
+                                        md-cols="5" md-rows="1"
+                                        md-row-height="3:1" md-col-width="2:2"
+                                         >
+                                         Rating:
+                                         <md-grid-tile class="gray" ng-repeat="n in [1,2,3,4,5]">
+                                                <md-icon ng-click="cycleRating(noteType,n)" ng-if="noteType.rating>=n " md-svg-icon="starfull"></md-icon>
+                                                <md-icon ng-click="cycleRating(noteType,n)" ng-if="noteType.rating==(n-.5) " md-svg-icon="starhalf"></md-icon>
+                                                <md-icon ng-click="cycleRating(noteType,n)" ng-if="noteType.rating<(n-.5) " md-svg-icon="starempty"></md-icon>
+                                            </md-grid-tile>
+                                        </md-grid-list> -->
+                                        <!-- <md-divider></md-divider> -->
+                                </div>
+                        </div>
+                </md-content>
+
+
+
+
+
+                        <!-- <div flex layout-margin layout-padding style="background-color:gray">
+                                <h3>//drink.wh_name//</h3>
+                        </div>
+
+                        <div  style="overflow-y: scroll"  style="background-color:gray" layout-padding>
+                            <div ng-repeat="noteType in drink.wh_notes_types" layout-margin  flex>
+                                <div>
+                                    <span class="drinkSubHead">//noteType.note_type//:</span>
+                                    <span class="md-block">//noteType.note_label//</span>
+                                </div>
+                                <md-content style="background-color: transparent" flex>
+                                    <div ng-repeat="note in noteType.note_ratings" 
+                                    class="noteRatingBox"
+                                    ng-class="{'noteRatingBoxNeutral':note.rating==0,'noteRatingBoxAgree':note.rating==1,'noteRatingBoxDisagree':note.rating==-1}"
+                                    ng-click="toggleNoteRating(note);updateRating(note)" layout="row">
+                                        <span class="noteText">             //note.note//       </span>
+                                        <div class="noteRatingUserAlso">    //note.also.length//</div>
+                                        <div class="noteRatingUserNeutral"> //note.neutral//    </div>
+                                    </div>
+                                </md-content>
+                                <md-divider></md-divider>
+                            </div>
+
+                        </div> -->
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </div>

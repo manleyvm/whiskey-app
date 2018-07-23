@@ -1,0 +1,43 @@
+body {
+    height:100%;
+    width: 100%;
+    background-color: red;
+}
+
+.noteRatingBox{
+    background-color: red;
+    float: left;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 4px;
+}
+
+.noteRatingBoxNeutral {
+    background-color: yellow;
+}
+
+.noteRatingBoxAgree {
+    background-color: green;
+}
+
+.noteRatingBoxDisagree {
+    background-color: red;
+}
+.noteRatingUserNeutral{
+    background-color: silver;
+    padding: 4px;
+}
+
+.noteRatingUserAlso{
+
+    padding: 4px;
+}
+span.noteText{
+    padding: 4px;
+}
+
+span.drinkSubHead {
+
+    padding: 2px 5px 2px 5px;
+    font-weight: bold;
+}
